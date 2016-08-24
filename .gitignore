@@ -1,0 +1,9 @@
+typings
+app/**/*.js
+app/**/*.map
+node_modules
+server/node_modules
+jspm_packages
+bower_components
+tmp
+desktop.ini
