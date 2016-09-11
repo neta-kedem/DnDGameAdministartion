@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h3>Choose a game to enter</h3>
+
+<div *ngIf="games.length">
+    <label>Your Games:</label><br>
+    <div *ngFor="let game of games">
+        <input type="radio" name="buildTool" value={{game.name}} [(ngModel)]="currGame">{{game.name}}</div>
+    <br>
+    <input [disabled]="(!currGame)" type="button" class="btn btn-default" value="Enter" (click)="existingGame(currGame)">
+</div>
+<br>
+
+<form (ngSubmit)="newGame(game)" novalidate>
+    <div class="form-group">
+        <label for="game">Create a new game</label>
+
+        <input type="text" class="form-control"
+               required name="game" id="game"
+               [(ngModel)]="game" #gameForm="ngModel">
+
+        <small [hidden]="gameForm.valid || !(gameForm.touched)" class="text-danger">
+            game name is required if you want to build a new game.
+        </small>
+
+    </div>
+    <button type="submit" [disabled]="(!gameForm.valid)"
+            class="btn btn-default">
+        Add New Game
+    </button>
+</form>
+<br>
+<input type="button" class="btn btn-default" value="Choose a different game" (click)="otherGame()">
+</body>
+</html>

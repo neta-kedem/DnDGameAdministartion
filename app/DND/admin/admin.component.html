@@ -1,0 +1,18 @@
+<form (ngSubmit)="addAdmin(user.username)" novalidate>
+	<div class="form-group">
+		<label>Add a new admin</label>
+
+		<input type="text" class="form-control"
+			required name="username"
+			[(ngModel)]="user.username" #username="ngModel" >
+
+	</div>
+	<!-- <button class="btn btn-primary" type="submit">Sign Up</button> -->
+	<button type="submit" [disabled]="(!username.valid)"
+			class="btn btn-default">
+		Add Admin
+	</button>
+</form>
+
+
+<input type="button" class="btn btn-danger" value="Delete the game">

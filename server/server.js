@@ -1,22 +1,18 @@
-// Minimal Simple REST API Handler (With MongoDB)
-// Author: Yaron Biton misterBIT.co.il
-
-
 "use strict";
 const 	express 		= require('express'),
 		bodyParser 		= require('body-parser'),
 		cors 			= require('cors'),
-		mongodb 		= require('mongodb')
+		mongodb 		= require('mongodb');
 
 function dbConnect() {
 
 	return new Promise((resolve, reject) => {
 		// Connection URL
-		var url = 'mongodb://localhost:27017/seed';
+		var url = 'mongodb://localhost:27017/DND';
 		// Use connect method to connect to the Server
 		mongodb.MongoClient.connect(url, function (err, db) {
 			if (err) {
-				cl('Cannot connect to DB', err)
+				cl('Cannot connect to DB', err);
 				reject(err);
 			}
 			else {
@@ -40,7 +36,7 @@ app.get('/data/:objType', function (req, res) {
 
 		collection.find({}).toArray((err, objs) => {
 			if (err) {
-				cl('Cannot get you a list of ', err)
+				cl('Cannot get you a list of ', err);
 				res.json(404, { error: 'not found' })
 			} else {
 				cl("Returning list of " + objs.length + " " + objType + "s");
@@ -61,7 +57,7 @@ app.get('/data/:objType/:id', function (req, res) {
 
 		collection.findOne({_id: new mongodb.ObjectID(objId)}, (err, objs) => {
 			if (err) {
-				cl('Cannot get you that ', err)
+				cl('Cannot get you that ', err);
 				res.json(404, { error: 'not found' })
 			} else {
 				cl("Returning a single"+ objType);
@@ -81,7 +77,7 @@ app.delete('/data/:objType/:id', function (req, res) {
 		const collection = db.collection(objType);
 		collection.deleteOne({ _id:  new mongodb.ObjectID(objId)}, (err, result) => {
 			if (err) {
-				cl('Cannot Delete', err)
+				cl('Cannot Delete', err);
 				res.json(500, { error: 'Delete failed' })
 			} else {
 				cl("Deleted", result);
@@ -89,11 +85,7 @@ app.delete('/data/:objType/:id', function (req, res) {
 			}
 			db.close();
 		});
-
 	});
-
-
-
 });
 
 // POST - adds 
@@ -108,7 +100,7 @@ app.post('/data/:objType', function (req, res) {
 
 		collection.insert(obj, (err, result) => {
 			if (err) {
-				cl(`Couldnt insert a new ${objType}`, err)
+				cl(`Couldnt insert a new ${objType}`, err);
 				res.json(500, { error: 'Failed to add' })
 			} else {
 				cl(objType + " added");
@@ -132,7 +124,7 @@ app.put('/data/:objType/:id', function (req, res) {
 		collection.updateOne({ _id:  new mongodb.ObjectID(objId)}, newObj,
 		 (err, result) => {
 			if (err) {
-				cl('Cannot Update', err)
+				cl('Cannot Update', err);
 				res.json(500, { error: 'Update failed' })
 			} else {
 				cl("Updated", result);
@@ -147,10 +139,11 @@ app.put('/data/:objType/:id', function (req, res) {
 
 
 // Kickup our server 
-const baseUrl = 'http://localhost:3003/data';
-app.listen(3003, function () {
+const baseUrl = 'http://localhost:3005/data';
+app.listen(3005, function () {
 	console.log(`misterREST server is ready at ${baseUrl}`);
-	console.log(`GET (list): \t\t ${baseUrl}/{entity}`);
+	console.log(`GE
+	T (list): \t\t ${baseUrl}/{entity}`);
 	console.log(`GET (single): \t\t ${baseUrl}/{entity}/{id}`);
 	console.log(`DELETE: \t\t ${baseUrl}/{entity}/{id}`);
 	console.log(`PUT (update): \t\t ${baseUrl}/{entity}/{id}`);
