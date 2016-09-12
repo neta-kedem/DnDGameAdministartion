@@ -5,7 +5,7 @@ import {Observable, Subject} from 'rxjs/Rx';
 
 import * as io from 'socket.io-client';
 
-
+const localhost = '192.168.0.42';
 export class AdminModal {
 	
 	constructor(public username: string){}
@@ -13,7 +13,7 @@ export class AdminModal {
 
 @Injectable()
 export class AdminService {
-	private baseUrl = 'http://localhost:3005/data/admin/';
+	private baseUrl = 'http://'+localhost+':3005/data/admin/';
 	constructor(private http: Http) {}
 
 

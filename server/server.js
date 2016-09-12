@@ -4,11 +4,14 @@ const 	express 		= require('express'),
 		cors 			= require('cors'),
 		mongodb 		= require('mongodb');
 
+const localhost = '192.168.0.42';
+
+
 function dbConnect() {
 
 	return new Promise((resolve, reject) => {
 		// Connection URL
-		var url = 'mongodb://localhost:27017/DND';
+		var url = 'mongodb://'+localhost+':27017/DND';
 		// Use connect method to connect to the Server
 		mongodb.MongoClient.connect(url, function (err, db) {
 			if (err) {
@@ -139,11 +142,10 @@ app.put('/data/:objType/:id', function (req, res) {
 
 
 // Kickup our server 
-const baseUrl = 'http://localhost:3005/data';
+const baseUrl = 'http://'+localhost+':3005/data';
 app.listen(3005, function () {
 	console.log(`misterREST server is ready at ${baseUrl}`);
-	console.log(`GE
-	T (list): \t\t ${baseUrl}/{entity}`);
+	console.log(`GET (list): \t\t ${baseUrl}/{entity}`);
 	console.log(`GET (single): \t\t ${baseUrl}/{entity}/{id}`);
 	console.log(`DELETE: \t\t ${baseUrl}/{entity}/{id}`);
 	console.log(`PUT (update): \t\t ${baseUrl}/{entity}/{id}`);

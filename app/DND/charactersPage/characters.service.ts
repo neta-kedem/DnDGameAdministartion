@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import {CharacterModel} from './character.model'; 
+import {CharacterModel} from './character.model';
+
+const localhost = '192.168.0.42';
 
 @Injectable()
 export class CharacterService {
 
-  private baseUrl = 'http://localhost:3005/data/character/';
+  private baseUrl = 'http://'+localhost+':3005/data/character/';
   constructor(private http: Http) {}
 
   // query (GETs a list)

@@ -19,7 +19,7 @@ export class loginPageComponent implements OnInit {
 	public user = {username:'', password:''};
 	public users: any[];
 	public games: any[] = [{'name':'not yet loaded'}];
-	public currGame:string;
+	public currGame: string;
 	constructor(private router: Router,
 				private loginService:LoginService) { }
 
@@ -38,10 +38,15 @@ export class loginPageComponent implements OnInit {
 
 	public save(username, password) {
 		console.log(username, password);
-		if(this.users.some((user)=>{return ((user.username === username)&&(user.password === password))})){
-			this.loginService.storeUsername(username);
+		let userObj = this.users.filter((user)=>{return ((user.username === username)&&(user.password === password))})[0];
+		if(userObj){
+			console.log('userObj: component', userObj);
+			this.loginService.storeUsername(userObj);
 			// this.loginService.storeCurrGame(currGame);
 			this.router.navigate(['/yourGames']);
+			// this.loginService.storeUsername(username);
+			// this.loginService.storeCurrGame(currGame);
+			// this.router.navigate(['/yourGames']);
 		} else {
 			alert('wrong username or password')
 		}
@@ -52,10 +57,14 @@ export class loginPageComponent implements OnInit {
 			alert('username already exist');	
 		}
 		else{
-			this.loginService.save({username:username, password:password});
-			this.loginService.storeUsername(username);
-			// this.loginService.storeCurrGame(currGame);
-			this.router.navigate(['/yourGames']);
+			let prmLogin = this.loginService.save({username:username, password:password, games:[]});
+
+			prmLogin.then(userObj =>{
+				console.log('userObj: component', userObj);
+				this.loginService.storeUsername(userObj);
+				// this.loginService.storeCurrGame(currGame);
+				this.router.navigate(['/yourGames']);
+			});
 		}
 	}
 

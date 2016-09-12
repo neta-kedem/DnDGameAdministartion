@@ -6,11 +6,14 @@
 </head>
 <body>
 <h3>Choose a game to enter</h3>
-
+<games-filter (filterChange)="filter = $event"></games-filter>
 <div *ngIf="games.length">
-    <label>Your Games:</label><br>
-    <div *ngFor="let game of games">
-        <input type="radio" name="buildTool" value={{game.name}} [(ngModel)]="currGame">{{game.name}}</div>
+    <input type="button" class="btn btn-primary" value="Your Games:" (click)="yourGames()" >
+    <input type="button" class="btn btn-danger" value="Other Games:" (click)="otherGames()">
+    <br>
+    <div *ngFor="let game of currShownGames | filterBy:filter">
+        <input type="radio" name="buildTool" value={{game._id}} [(ngModel)]="currGame">{{game.name}}
+    </div>
     <br>
     <input [disabled]="(!currGame)" type="button" class="btn btn-default" value="Enter" (click)="existingGame(currGame)">
 </div>
