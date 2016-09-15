@@ -5,7 +5,7 @@ import {Observable, Subject} from 'rxjs/Rx';
 
 import * as io from 'socket.io-client';
 
-const localhost = '192.168.0.42';
+const localhost = 'localhost';
 
 export class UserModal {
 	

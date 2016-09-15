@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 import {CharacterModel} from './character.model';
 
-const localhost = '192.168.0.42';
+const localhost = 'localhost';
 
 @Injectable()
 export class CharacterService {
