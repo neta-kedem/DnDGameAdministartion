@@ -125,7 +125,7 @@ export class LoginService {
 		console.log('storeCurrGame:gameName', gameName);
     	localStorage.setItem('currDNDgameId', currGameId);
     	localStorage.setItem('currDNDgame', gameName);
-		this.addGameToUser(currGameId, this.getId());
+		this.addGameToUser({_id:currGameId, name:gameName}, this.getId());
   	}
   	logout(){
     	localStorage.removeItem('DNDUsername');

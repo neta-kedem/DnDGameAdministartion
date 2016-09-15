@@ -53,13 +53,13 @@ export class otherGamesComponent implements OnInit {
 
     existingGame(game){
         console.log('game', game);
-        this.loginService.storeCurrGame(game);
+        // this.loginService.storeCurrGame(game);
         this.router.navigate(['/character']);
     }
 
     newGame(name){
         this.loginService.saveGames(name, this.loginService.getUsername());
-        this.loginService.storeCurrGame(name);
+        // this.loginService.storeCurrGame(name);
         this.router.navigate(['/character']);
     }
 

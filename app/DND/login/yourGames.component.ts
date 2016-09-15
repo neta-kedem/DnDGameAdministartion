@@ -17,7 +17,7 @@ import { GamesFilterComponent } from './games-filter.component';
 })
 
 export class yourGamesComponent implements OnInit {
-    public user = {username:'', password:''};
+    // public user = {username:'', password:''};
     public user: any;
     public games: any[] = [{'name':'not yet loaded'}];
     public currShownGames: any[];
